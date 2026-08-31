@@ -14,10 +14,7 @@ export async function signIn(formData: FormData) {
   const { error } = await supabase.auth.signInWithPassword({ email, password })
 
   if (error) {
-    const debug = `email="${email}" pwLen=${password.length} url=${process.env.NEXT_PUBLIC_SUPABASE_URL} keyPrefix=${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.slice(0, 12)}`
-    redirect(
-      `/login?error=${encodeURIComponent(`로그인 실패 (${error.status ?? "-"} ${error.code ?? error.name}): ${error.message} | ${debug}`)}`,
-    )
+    redirect(`/login?error=${encodeURIComponent("아이디 또는 비밀번호가 올바르지 않습니다.")}`)
   }
 
   redirect("/dashboard")
