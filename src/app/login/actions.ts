@@ -16,7 +16,9 @@ export async function signIn(formData: FormData) {
   })
 
   if (error) {
-    redirect(`/login?error=${encodeURIComponent("아이디 또는 비밀번호가 올바르지 않습니다.")}`)
+    redirect(
+      `/login?error=${encodeURIComponent(`로그인 실패 (${error.status ?? "-"} ${error.code ?? error.name}): ${error.message}`)}`,
+    )
   }
 
   redirect("/dashboard")
